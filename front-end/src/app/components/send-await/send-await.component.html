@@ -50,14 +50,34 @@
                         <div class="fd-panel__header">
                             <div class="fd-panel__head">
                                 <h1 class="fd-panel__title">
-                                    Recieved from the Back-end {{ waiting }}
+                                    Received from the Back-end
                                 </h1>
                                 <p class="fd-panel__description">
                                     The information bellow has been received from the Back-end
                                 </p>
                             </div>
+                            <div class="fd-panel__actions">
+                                    <button (click)="clearReceivedData()" class="fd-button--secondary"><span class="sap-icon--delete"></span>&nbsp;&nbsp;Clear</button>
+                                </div>
                         </div>
                         <div class="fd-panel__body">
+                            <table class="fd-table">
+                                <thead>
+                                    <tr>
+                                        <th class="fd-col--4">Sent String</th>
+                                        <th class="fd-col--4">Received String Hash</th>
+                                        <th class="fd-col--4">Date Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of receivedData">
+                                        <td class="fd-col--4">{{ item.originalString }}</td>
+                                        <td class="fd-col--4">{{ item.stringHash }}</td>
+                                        <td class="fd-col--4">{{ item.dateTime | date:'HH:mm:ss - dd.mm.yy' }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
                         </div>
                     </div>
                 </div>

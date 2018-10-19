@@ -6,3 +6,9 @@ $fd-scss-font-path: "~fundamental-ui/scss/fonts/";
 //@import "../node_modules/fundamental-ui/scss/theme/dark.scss";
 
 @import "../node_modules/fundamental-ui/scss/all.scss";
+
+// Overrides
+
+.fd-table td { word-break: break-all; }
+
+.fd-table tr:hover { background-color: fd-color("background", 1) }
