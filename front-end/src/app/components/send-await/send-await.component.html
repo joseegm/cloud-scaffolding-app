@@ -1,8 +1,67 @@
 <article class="fd-page">
-        <div class="fd-page__content">
-            <section class="fd-section">
-                <h1>Send &amp; Await</h1>
-                <p>Bla</p>
-            </section>
-        </div>
-    </article>
+    <div class="fd-page__content">
+        <section class="fd-section">
+            <div class="fd-action-bar">
+                <div class="fd-action-bar__header">
+                    <h1 class="fd-action-bar__title">
+                        Send &amp; Await
+                    </h1>
+                </div>
+            </div>
+            <div class="fd-container fd-container--fluid">
+                <div class="fd-col--6">
+                    <div class="fd-panel">
+                        <div class="fd-panel__header">
+                            <div class="fd-panel__head">
+                                <h1 class="fd-panel__title">
+                                    Send to Back-end
+                                </h1>
+                                <p class="fd-panel__description">
+                                    The information on the form bellow will be sent to the Back-end
+                                </p>
+                            </div>
+                        </div>
+                        <div class="fd-panel__body">
+                            <form>
+                                <div class="fd-form__set">
+                                    <div class="fd-form__item">
+                                        <label class="fd-form__label" for="input-1">String</label>
+                                        <input class="fd-form__control" type="text" id="input-1" [(ngModel)]="stringToSend" [ngModelOptions]="{standalone: true}">
+                                    </div>
+                                </div>
+                                <div class="fd-form__set">
+                                    <div class="fd-form__item">
+                                        <button (click)="send()" class="fd-button fd-button--action-bar fd-has-float-left">
+                                            Send to Back-end
+                                        </button>
+                                    </div>
+                                    <br/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="fd-col--6">
+                    <div class="fd-panel" [attr.aria-busy]="waiting">
+                        <div class="fd-spinner" [attr.aria-hidden]="!waiting" aria-label="Loading">
+                            <div></div>
+                        </div>
+
+                        <div class="fd-panel__header">
+                            <div class="fd-panel__head">
+                                <h1 class="fd-panel__title">
+                                    Recieved from the Back-end {{ waiting }}
+                                </h1>
+                                <p class="fd-panel__description">
+                                    The information bellow has been received from the Back-end
+                                </p>
+                            </div>
+                        </div>
+                        <div class="fd-panel__body">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</article>
