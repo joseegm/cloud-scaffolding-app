@@ -64,8 +64,8 @@
                             <table class="fd-table">
                                 <thead>
                                     <tr>
-                                        <th class="fd-col--4">Sent String</th>
-                                        <th class="fd-col--4">Received String Hash</th>
+                                        <th class="fd-col--4">String</th>
+                                        <th class="fd-col--4">String Hashed</th>
                                         <th class="fd-col--4">Date Time</th>
                                     </tr>
                                 </thead>
@@ -73,7 +73,7 @@
                                     <tr *ngFor="let item of receivedData">
                                         <td class="fd-col--4">{{ item.originalString }}</td>
                                         <td class="fd-col--4">{{ item.stringHash }}</td>
-                                        <td class="fd-col--4">{{ item.dateTime | date:'HH:mm:ss - dd.mm.yy' }}</td>
+                                        <td class="fd-col--4" style="font-family: monospace;">{{ item.dateTime | date:'HH:mm:ss - dd.mm.yy' }}</td>
                                     </tr>
                                 </tbody>
                             </table>
