@@ -13,7 +13,7 @@ export class PushComponent implements OnInit {
     ngOnInit() {
         this.receivedData = new Array<any>();
 
-        let timer0 = timer(0, 500);
+        let timer0 = timer(0, 1200);
 
         timer0.subscribe(() => {
             this.receivedData.push(this.newElement());

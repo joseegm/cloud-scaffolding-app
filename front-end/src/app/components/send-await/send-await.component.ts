@@ -7,24 +7,20 @@ import { Component, OnInit } from '@angular/core';
 export class SendAwaitComponent implements OnInit {
 
     waiting: boolean;
-
     stringToSend: string;
-
     receivedData: Array<any>;
 
     ngOnInit() {
         this.waiting = false;
         this.stringToSend = '';
-
         this.receivedData = new Array<any>();
         this.receivedData.push(this.newReceivedData());
     }
 
     send() {
         this.waiting = true;
-
         // mocked
-        this.receivedData.unshift(this.newReceivedData());
+        this.receivedData.push(this.newReceivedData());
         this.waiting = false;
     }
 
@@ -39,9 +35,7 @@ export class SendAwaitComponent implements OnInit {
             originalString: this.stringToSend,
             stringHash: this.stringToSend + 'hashed'
         }
-
         this.stringToSend = '';
-
         return currentData;
     }
 

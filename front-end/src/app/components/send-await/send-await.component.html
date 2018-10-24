@@ -46,7 +46,6 @@
                         <div class="fd-spinner" [attr.aria-hidden]="!waiting" aria-label="Loading">
                             <div></div>
                         </div>
-
                         <div class="fd-panel__header">
                             <div class="fd-panel__head">
                                 <h1 class="fd-panel__title">
@@ -57,27 +56,27 @@
                                 </p>
                             </div>
                             <div class="fd-panel__actions">
-                                    <button (click)="clearReceivedData()" class="fd-button--secondary"><span class="sap-icon--delete"></span>&nbsp;&nbsp;Clear</button>
-                                </div>
+                                <button (click)="clearReceivedData()" class="fd-button--secondary">
+                                    <span class="sap-icon--delete"></span>&nbsp;&nbsp;Clear</button>
+                            </div>
                         </div>
                         <div class="fd-panel__body">
                             <table class="fd-table">
                                 <thead>
                                     <tr>
-                                        <th class="fd-col--4">String</th>
+                                        <th class="fd-col--5">String</th>
                                         <th class="fd-col--4">String Hashed</th>
-                                        <th class="fd-col--4">Date Time</th>
+                                        <th class="fd-col--3">Time</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let item of receivedData">
-                                        <td class="fd-col--4">{{ item.originalString }}</td>
+                                        <td class="fd-col--5">{{ item.originalString }}</td>
                                         <td class="fd-col--4">{{ item.stringHash }}</td>
-                                        <td class="fd-col--4" style="font-family: monospace;">{{ item.dateTime | date:'HH:mm:ss - dd.mm.yy' }}</td>
+                                        <td class="fd-col--3" style="font-family: monospace;">{{ item.dateTime | date:'HH:mm:ss' }}</td>
                                     </tr>
                                 </tbody>
                             </table>
-
                         </div>
                     </div>
                 </div>
