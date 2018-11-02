@@ -14,7 +14,7 @@ export class SendAwaitComponent implements OnInit {
         this.waiting = false;
         this.stringToSend = '';
         this.receivedData = new Array<any>();
-        this.receivedData.push(this.newReceivedData());
+        //this.receivedData.push(this.newReceivedData());
     }
 
     send() {
