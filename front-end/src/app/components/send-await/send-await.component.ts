@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Broadcaster } from '../broadcaster/broadcaster.service';
+
 @Component({
   selector: 'send-await',
   templateUrl: './send-await.component.html'
@@ -10,18 +12,25 @@ export class SendAwaitComponent implements OnInit {
     stringToSend: string;
     receivedData: Array<any>;
 
+    constructor(private broadcaster: Broadcaster) {}
+
     ngOnInit() {
         this.waiting = false;
         this.stringToSend = '';
         this.receivedData = new Array<any>();
-        //this.receivedData.push(this.newReceivedData());
+
+        this.broadcaster.on('sendData').subscribe( 
+            d =>  {
+                this.receivedData.push(d);
+                this.waiting = false;
+            }
+        );
     }
 
     send() {
         this.waiting = true;
-        // mocked
-        this.receivedData.push(this.newReceivedData());
-        this.waiting = false;
+
+        this.broadcaster.broadcast('sendData', this.newReceivedData());
     }
 
     clearReceivedData() {

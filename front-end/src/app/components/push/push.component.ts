@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
 import { timer } from 'rxjs';
+
+import { Broadcaster } from '../broadcaster/broadcaster.service';
 
 @Component({
   selector: 'push',
@@ -10,14 +11,20 @@ export class PushComponent implements OnInit {
 
     receivedData: Array<any>;
 
+    constructor(private broadcaster: Broadcaster) {}
+
     ngOnInit() {
         this.receivedData = new Array<any>();
 
-        let timer0 = timer(0, 1200);
+        let t = timer(0, 1200);
 
-        timer0.subscribe(() => {
-            this.receivedData.push(this.newElement());
+        t.subscribe(() => {
+            this.broadcaster.broadcast('newElement', this.newElement());
         });
+
+        this.broadcaster.on('newElement').subscribe(
+            newElement => this.receivedData.push(newElement)
+        );
     }
 
     newElement():any {
