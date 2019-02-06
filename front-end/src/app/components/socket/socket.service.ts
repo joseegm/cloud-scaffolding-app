@@ -20,7 +20,7 @@ export class SocketService {
         this.setMessages();
 
         this.send('test', // delete later
-            { destination: "ORCHESTRA", status: "new", type: "action", command: "subscribe", identifier: "1234", data: { identifier: "1234" } }
+            { method: "subscribe", data: {group: "gui"} }
         );
 
         this.socket.on('disconnect', () => {
@@ -39,6 +39,7 @@ export class SocketService {
         data.source = data.source || 'GUI'; // delete later
 
         this.socket.send(data);
+        console.log('send: '+JSON.stringify(data))
     }
 
     setMessages() {
@@ -46,10 +47,13 @@ export class SocketService {
             if (typeof data == 'string')
                 try {
                     data = JSON.parse(data);
+                    console.log('data: ' + JSON.stringify(data,2,2));
+
                 } catch (e) {
                     console.log('Malformed JSON: ' + data);
                 }
             this.broadcaster.broadcast(data.command, data);
+
         })
     }
 

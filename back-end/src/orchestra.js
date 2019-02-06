@@ -10,9 +10,11 @@ server.on('dataForStatemachine', (data) => {
 	TCPServer.sendMessageByGroup(data,'statemachine')
 })
 
+server.on('newConnection', (data) => {
+	log.info('new connection');
+})
 
 server.on('data', (data) => {
-log.info('data: '+JSON.stringify(data));
 
 	// if(data.method == 'subscribe') {
 	// 	data = {subscribed: true}
@@ -20,14 +22,20 @@ log.info('data: '+JSON.stringify(data));
 	// 	TCPServer.sendMessageByGroup(data,"orchestra");
 	// 	log.info('replyed')
 	// } else
-	 if(data.method == 'ping') {
+	if(data.method == 'ping') {
 
-		log.info('ping: '+JSON.stringify(data,2,2))
-		TCPServer.sendMessageById(data.sender,data);
-		// TCPServer.sendMessageByGroup(data,'statemachine')
+	 log.info('ping: '+JSON.stringify(data,2,2))
+	 TCPServer.sendMessageById(data.sender,data);
+	 // TCPServer.sendMessageByGroup(data,'statemachine')
 
 
-	} else {
+ } else if(data.method == 'broadcastToGroup') {
+
+	 log.info('broadcastToGroup: '+JSON.stringify(data,2,2))
+	 TCPServer.sendMessageByGroup(data,data.data.group)
+
+
+ } else {
 		log.info('send to client: '+JSON.stringify(data,2,2))
 		TCPServer.sendMessageById(data.sender,data);
 	}

@@ -1,6 +1,6 @@
 const fs = require('fs');
 const dateTime = require('node-datetime');
-var rfs    = require('rotating-file-stream');
+const rfs    = require('rotating-file-stream');
 
 pwd = process.cwd();
 pwd+'/logs/file.log'

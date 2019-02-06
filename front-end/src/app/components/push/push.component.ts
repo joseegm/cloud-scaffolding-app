@@ -20,7 +20,7 @@ export class PushComponent implements OnInit, OnDestroy {
         let t = timer(0, 1200);
 
         this.timerSubscription = t.subscribe(() => {
-            this.broadcaster.broadcast('newElement', this.newElement());
+            // this.broadcaster.broadcast('newElement', this.newElement());
         });
 
         this.broadcaster.on('newElement').subscribe(

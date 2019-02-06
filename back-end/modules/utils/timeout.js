@@ -1,7 +1,7 @@
-net = require('net');
-events = require('events');
-eventEmitter = new events.EventEmitter();
-message = require('../../models/tcpMessage')
+const net = require('net');
+const events = require('events');
+const eventEmitter = new events.EventEmitter();
+const message = require('../../models/tcpMessage')
 const {log} = require('../logService/index')
 
 allTimeouts = [];

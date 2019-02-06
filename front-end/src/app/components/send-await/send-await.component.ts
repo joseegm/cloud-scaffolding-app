@@ -21,7 +21,7 @@ export class SendAwaitComponent implements OnInit, OnDestroy {
         this.stringToSend = '';
         this.receivedData = new Array<any>();
 
-        this.subscription = this.broadcaster.on('sendData').subscribe( 
+        this.subscription = this.broadcaster.on('sendData2').subscribe(
             d =>  {
                 this.receivedData.push(d);
                 this.waiting = false;
@@ -30,8 +30,7 @@ export class SendAwaitComponent implements OnInit, OnDestroy {
     }
 
     send() {
-        this.waiting = true;
-
+        this.waiting = false;
         this.broadcaster.broadcast('sendData', this.newReceivedData());
     }
 
@@ -41,10 +40,10 @@ export class SendAwaitComponent implements OnInit, OnDestroy {
 
     private newReceivedData():any {
         var currentData = {
+            method: 'hash',
             id: Math.floor(Math.random() * 1e100),
             dateTime: Date.now(),
-            originalString: this.stringToSend,
-            stringHash: this.stringToSend + 'hashed'
+            originalString: this.stringToSend
         }
         this.stringToSend = '';
         return currentData;
