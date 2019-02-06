@@ -16,11 +16,10 @@ export class SocketService {
     }
 
     public initSocket(): void {
-        //this.socket = socketIo('ws://18.222.139.67:80');
         this.socket = socketIo('ws://127.0.0.1:8877');
         this.setMessages();
 
-        this.send('test',
+        this.send('test', // delete later
             { destination: "ORCHESTRA", status: "new", type: "action", command: "subscribe", identifier: "1234", data: { identifier: "1234" } }
         );
 
@@ -37,7 +36,7 @@ export class SocketService {
 
     public send(messageId: string, data: any): void {
         data.datetime = data.datetime || Date.now;
-        data.source = data.source || 'GUI';
+        data.source = data.source || 'GUI'; // delete later
 
         this.socket.send(data);
     }

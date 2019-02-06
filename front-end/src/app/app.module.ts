@@ -9,6 +9,7 @@ import { routing } from './app.routes';
 import { HomeComponent } from './components/home/home.component';
 import { SendAwaitComponent } from './components/send-await/send-await.component';
 import { PushComponent } from './components/push/push.component';
+import { SocketService } from './components/socket/socket.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,9 @@ import { PushComponent } from './components/push/push.component';
 
     routing
   ],
-  providers: [],
+  providers: [
+      SocketService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
