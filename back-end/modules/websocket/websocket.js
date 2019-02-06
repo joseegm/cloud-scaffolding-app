@@ -4,7 +4,7 @@
 
 
 message = require('../../models/tcpMessage')
-const {log} = require('../log/index')
+const {log} = require('../logService/index')
 
 
 // Load the TCP Library
