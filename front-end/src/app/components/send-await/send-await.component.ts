@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Broadcaster } from '../broadcaster/broadcaster.service';
 
@@ -6,11 +6,13 @@ import { Broadcaster } from '../broadcaster/broadcaster.service';
   selector: 'send-await',
   templateUrl: './send-await.component.html'
 })
-export class SendAwaitComponent implements OnInit {
+export class SendAwaitComponent implements OnInit, OnDestroy {
 
     waiting: boolean;
     stringToSend: string;
     receivedData: Array<any>;
+
+    subscription = null;
 
     constructor(private broadcaster: Broadcaster) {}
 
@@ -19,7 +21,7 @@ export class SendAwaitComponent implements OnInit {
         this.stringToSend = '';
         this.receivedData = new Array<any>();
 
-        this.broadcaster.on('sendData').subscribe( 
+        this.subscription = this.broadcaster.on('sendData').subscribe( 
             d =>  {
                 this.receivedData.push(d);
                 this.waiting = false;
@@ -46,6 +48,10 @@ export class SendAwaitComponent implements OnInit {
         }
         this.stringToSend = '';
         return currentData;
+    }
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
     }
 
 }

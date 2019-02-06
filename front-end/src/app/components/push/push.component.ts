@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { timer } from 'rxjs';
 
 import { Broadcaster } from '../broadcaster/broadcaster.service';
@@ -7,9 +7,10 @@ import { Broadcaster } from '../broadcaster/broadcaster.service';
   selector: 'push',
   templateUrl: './push.component.html'
 })
-export class PushComponent implements OnInit {
+export class PushComponent implements OnInit, OnDestroy {
 
     receivedData: Array<any>;
+    timerSubscription = null;
 
     constructor(private broadcaster: Broadcaster) {}
 
@@ -18,7 +19,7 @@ export class PushComponent implements OnInit {
 
         let t = timer(0, 1200);
 
-        t.subscribe(() => {
+        this.timerSubscription = t.subscribe(() => {
             this.broadcaster.broadcast('newElement', this.newElement());
         });
 
@@ -40,6 +41,10 @@ export class PushComponent implements OnInit {
 
     clearReceivedData() {
         this.receivedData = new Array<any>();
+    }
+
+    ngOnDestroy() {
+        this.timerSubscription.unsubscribe();
     }
 
 }
