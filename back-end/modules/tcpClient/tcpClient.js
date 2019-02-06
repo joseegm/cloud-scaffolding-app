@@ -1,5 +1,5 @@
 const message = require('../../models/tcpMessage')
-const {log} = require('../log/index')
+const {log} = require('../logService/index')
 const net = require('net');
 const dateTime = require('node-datetime');
 events = require('events');
