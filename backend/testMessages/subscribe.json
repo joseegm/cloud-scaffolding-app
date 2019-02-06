@@ -1,0 +1,7 @@
+{
+  "destination" : "orchestra",
+  "method": "subscribe",
+  "data": {
+    "group" : "statemachine"
+  }
+}
