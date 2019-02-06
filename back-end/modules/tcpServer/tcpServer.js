@@ -2,7 +2,7 @@ net = require('net');
 events = require('events');
 eventEmitter = new events.EventEmitter();
 message = require('../../models/tcpMessage')
-const {log} = require('../log/index')
+const {log} = require('../logService/index')
 
 
 // Start a TCP Server
