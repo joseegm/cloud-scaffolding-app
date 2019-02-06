@@ -1,6 +1,6 @@
 const WSServer = require('../modules/websocket/index')
 const TCPClient = require('../modules/tcpClient/index')
-const {log} = require('../modules/log/index')
+const {log} = require('../modules/logService/index')
 const message = require('../models/tcpMessage')
 const utils =  require('../modules/utils/index')
 log.setName('Websocket')

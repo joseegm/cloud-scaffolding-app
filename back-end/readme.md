@@ -150,7 +150,7 @@ error response gets send on every method, which is not known
 ```
 
 
-*  if EFT is not set to setup 
+*  if EFT is not set to setup
 
 EFT must be in idle state by sending the setup command for every further command
 ```

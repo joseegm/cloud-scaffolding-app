@@ -1,5 +1,5 @@
 const TCPServer = require('../modules/tcpServer/index')
-const {log} = require('../modules/log/index')
+const {log} = require('../modules/logService/index')
 const message = require('../models/tcpMessage')
 
 log.setName('Orchestra')
