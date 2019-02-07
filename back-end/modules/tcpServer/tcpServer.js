@@ -25,8 +25,8 @@ server = net.createServer(function (socket) {
     try {
 
       try {
-        log.info('incomming data: '+data)
          _json = JSON.parse(data);
+         log.info('incomming data: '+JSON.stringify(_json,2,2))
 
          if(!isInGroup('statemachine',socket.remoteAddress + ":" + socket.remotePort)) {
            //if message comes not from statemachine
@@ -37,11 +37,9 @@ server = net.createServer(function (socket) {
         if(_json.method == 'subscribe') {
           log.info('need to subscribe');
           subscribeGroup(_json)
-        } else if (!isInGroup('statemachine',socket.remoteAddress + ":" + socket.remotePort)) {
-          log.info('data from client needs to be forwarded to statemachine')
+        } else if (!isInGroup('statemachine',socket.remoteAddress + ":" + socket.remotePort)) { // forward to statemachine
           eventEmitter.emit('dataForStatemachine',_json);
-        } else {
-          log.info('data from statemachine needs to be forwarded to client')
+        } else { // forward to all other clients
           eventEmitter.emit('data',_json);
         }
       } catch (e) {
@@ -108,8 +106,8 @@ function isInGroup(_group, _sender) {
 
 
 function subscribeGroup(_message) {
-  log.info('_message.data.group: '+_message.data.group)
-  log.info('clients.length: '+clients.length)
+  // log.info('_message.data.group: '+_message.data.group)
+  // log.info('clients.length: '+clients.length)
 
   for (var i = 0; i < clients.length; i++) {
     if(clients[i].id ==  _message.sender) {
@@ -117,13 +115,6 @@ function subscribeGroup(_message) {
       clients[i].subscribed = true;
       log.info('subscribed: '+_message.sender)
       sendMessageById(_message.sender,_message)
-
-      for (var ii = 0; ii < clients.length; ii++) {
-        log.info('Clients: '+clients[ii].id);
-        log.info('Clients subscribed : '+clients[ii].subscribed);
-        log.info('Clients group : '+clients[ii].group);
-      }
-
     } else {
       log.info('no client found to subscribe')
     }
@@ -140,8 +131,6 @@ function getClientByGroup(_group) {
 function sendMessageByGroup(_data,_group) {
   log.info('sending message by group: '+_group)
   getClientByGroup(_group).forEach((client) => {
-    log.info('sending data: '+JSON.stringify(_data))
-    log.info('client: '+client.id)
     sendMessageById(client.id, _data)
   })
   return true

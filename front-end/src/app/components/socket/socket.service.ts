@@ -47,8 +47,6 @@ export class SocketService {
             if (typeof data == 'string')
                 try {
                     data = JSON.parse(data);
-                    console.log('data: ' + JSON.stringify(data,2,2));
-
                 } catch (e) {
                     console.log('Malformed JSON: ' + data);
                 }

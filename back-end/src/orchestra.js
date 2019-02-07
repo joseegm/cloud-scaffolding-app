@@ -31,12 +31,12 @@ server.on('data', (data) => {
 
  } else if(data.method == 'broadcastToGroup') {
 
-	 log.info('broadcastToGroup: '+JSON.stringify(data,2,2))
+	 // log.info('broadcastToGroup: '+JSON.stringify(data,2,2))
 	 TCPServer.sendMessageByGroup(data,data.data.group)
 
 
  } else {
-		log.info('send to client: '+JSON.stringify(data,2,2))
+		// log.info('send to client: '+JSON.stringify(data,2,2))
 		TCPServer.sendMessageById(data.sender,data);
 	}
 
