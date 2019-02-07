@@ -31,22 +31,19 @@ export class SendAwaitComponent implements OnInit, OnDestroy {
 
     send() {
         this.waiting = false;
-        this.broadcaster.broadcast('sendData', this.newReceivedData());
-    }
 
-    clearReceivedData() {
-        this.receivedData = new Array<any>();
-    }
-
-    private newReceivedData():any {
-        var currentData = {
+        let data = {
             method: 'hash',
             id: Math.floor(Math.random() * 1e100),
             dateTime: Date.now(),
             originalString: this.stringToSend
         }
-        this.stringToSend = '';
-        return currentData;
+
+        this.broadcaster.broadcast('sendData', data);
+    }
+
+    clearReceivedData() {
+        this.receivedData = new Array<any>();
     }
 
     ngOnDestroy() {
